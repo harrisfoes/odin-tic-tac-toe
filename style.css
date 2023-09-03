@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+:root{
+    --beige: #FAF0D7;
+    --peach: #FFD9C0;
+    --blue: #8CC0DE;
+    --green: #CCEEBC;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Indie Flower', cursive;
+    font-size:32px;
+    background: var(--beige);
+    color: var(--blue)
+}
+
+.player-info {
+    padding:12px;
+}
+
+.remarks{
+    padding:30px;
+    align-self: center;
+}
+
+.container{
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+    align-items: center;
+    height:95vh;
+}
+
+.gameboard{
+    background: var(--blue);
+    width:120 * 3;
+    display:grid;
+    gap:8px;
+    grid-template-rows: repeat(3, 120px);
+    grid-template-columns: repeat(3, 120px);
+    grid-auto-flow:row;
+    border-radius:8px;
+
+}
+
+.cell {
+    background: var(--green);
+    width:auto;
+    height:auto;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.cell svg{
+    fill:var(--blue)
+}
+
+.footer{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--peach);
+    font-size:24px;
+    font-weight:800;
+    padding:8px;
+}
