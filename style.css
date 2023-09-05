@@ -81,7 +81,8 @@ body{
     color:var(--blue);
 }
 
-#start-button button:hover{
+#start-button:hover{
     background: var(--blue);
+    color: var(--green);
     border: 1px solid var(--green);
 }

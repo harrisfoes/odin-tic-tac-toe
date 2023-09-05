@@ -25,9 +25,12 @@ So I just realized that game programming is different than web programming, part
 
     [x] display current player
     [x] winner or tie checking
-    [ ] end state
+    [x] end state
     [] ability to start code again
     [] make start button work
         [] when start selected, add event listeners
     [] make restart button work
     [] modularizing code
+    
+-- Starting Modular
+Had to rewrite
