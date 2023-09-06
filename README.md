@@ -1,7 +1,7 @@
 # odin-tic-tac-toe
 Tic-tac-toe for The Odin Project while learning the principles of modular Javascript
 
-URL:https://harrisfoes.github.io/odin-tic-tac-toe/
+URL: https://harrisfoes.github.io/odin-tic-tac-toe/
 
 # Project Post-Mortem
 This project was particularly challenging for me due to not having a lot of experience in designing a modular JavaScript codebase, or starting any OOP moderate-large project for that matter. As such, I had already decided that I would code the tic-tac-toe logic in a functional/procedural way from the start and figure out how to break things down into separate modules from there. 
