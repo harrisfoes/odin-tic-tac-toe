@@ -65,7 +65,12 @@ function GameBoard() {
         return "continue";
     }
 
-    return { getBoard, addToBoard, printThisBoard, checkGameState };
+    return {
+        getBoard,
+        addToBoard,
+        printThisBoard,
+        checkGameState
+    };
 }
 
 function Cell() {
@@ -81,6 +86,7 @@ function Cell() {
 function GameController(player1Name, player2Name) {
     const board = GameBoard();
     let gameState = "continue";
+    let winner = "";
 
     const player = [
         { name: player1Name, token: "X" },
@@ -90,6 +96,8 @@ function GameController(player1Name, player2Name) {
 
     const getCurrentPlayer = () => currentPlayer;
 
+    const getWinner = () => winner;
+
     const switchPlayer = () => currentPlayer = (currentPlayer == player[0]) ? player[1] : player[0];
 
     const printNewRound = () => {
@@ -98,6 +106,8 @@ function GameController(player1Name, player2Name) {
 
     const playRound = (cell) => {
 
+        if (gameState != "continue") return;
+
         if (board.addToBoard(getCurrentPlayer().token, cell)) {
             console.log(`Player ${currentPlayer.name} adds ${currentPlayer.token} to cell ${cell}`);
 
@@ -105,8 +115,13 @@ function GameController(player1Name, player2Name) {
             check for win condition here, if we win, then print the winner, same for tie
             */
             gameState = board.checkGameState()
-            if (gameState == "win") { console.log(`Winner is ${currentPlayer.name}!`) }
-            if (gameState == "tie") { console.log(`It's a tie!`) }
+            if (gameState == "win") { 
+                console.log(`Winner is ${currentPlayer.name}!`)
+                winner = currentPlayer.name;
+            }
+            else if (gameState == "tie") { 
+                console.log(`It's a tie!`) 
+            }
 
             switchPlayer();
             printNewRound();
@@ -115,6 +130,8 @@ function GameController(player1Name, player2Name) {
         else {
             console.log(`${cell} is occupied`);
         }
+
+        return gameState;
     }
 
     const printGameLook = () => {
@@ -135,7 +152,8 @@ function GameController(player1Name, player2Name) {
         getBoard: board.getBoard,
         printBoard: board.printThisBoard,
         getGameState,
-        getCurrentPlayer
+        getCurrentPlayer,
+        getWinner
     }
 
 }
@@ -145,16 +163,28 @@ function ScreenController() {
     const game = GameController("X", "O");
     const boardDiv = document.querySelector(".gameboard");
     const playerInfo = document.querySelector(".player-info");
-
+    const restart = document.getElementById("restart-button");
 
     const updateBoard = () => {
         //get latest board and player
         const board = game.getBoard();
         const currentPlayer = game.getCurrentPlayer();
+        const gameState = game.getGameState();
         //console.log(board);
         boardDiv.textContent = "";
 
-        playerInfo.textContent = `It's ${currentPlayer.name}'s turn.`
+        //display win, lose, or which player to play 
+        if(gameState == "win" || gameState == "tie"){ 
+             displayWinner(gameState);
+             restart.style.visibility = '';
+             restart.addEventListener("click", function(){
+                location.reload() 
+            });
+        }
+        else 
+        {
+            playerInfo.textContent = `It's ${currentPlayer.name}'s turn.`
+        }
 
         //wherein we create the board
         board.forEach((cell, index) => {
@@ -180,12 +210,20 @@ function ScreenController() {
         game.playRound(selectedCell);
 
         updateBoard();
-
     }
 
-    boardDiv.addEventListener("click", clickManager)
+    const displayWinner = (gameState) =>{
+        if(gameState == "win") {
+            playerInfo.textContent = `The winner is ${game.getWinner()}`;
+        }
+        else{
+            playerInfo.textContent = `It's a tie!`
+        }
+    }
 
     //initializer
+    restart.style.visibility = 'hidden';
+    boardDiv.addEventListener("click", clickManager)
     updateBoard();
 }
 

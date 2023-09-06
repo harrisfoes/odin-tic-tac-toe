@@ -29,7 +29,7 @@ body{
 .container{
     display:flex;
     flex-direction:column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     height:95vh;
 }
@@ -43,7 +43,8 @@ body{
     grid-template-columns: repeat(3, 120px);
     grid-auto-flow:row;
     border-radius:8px;
-
+    margin-bottom:32px;
+    margin-top:16px;
 }
 
 .cell {
@@ -73,7 +74,7 @@ body{
     padding:8px;
 }
 
-#start-button{
+#restart-button{
     font-family:inherit;
     font-size: 1.2rem;
     font-weight:900;
@@ -84,9 +85,10 @@ body{
     padding: 8px 16px 8px 16px;
     cursor:pointer;
     color:var(--blue);
+    margin-bottom:180px;
 }
 
-#start-button:hover{
+#restart-button:hover{
     background: var(--blue);
     color: var(--green);
     border: 1px solid var(--green);
