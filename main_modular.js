@@ -17,7 +17,6 @@ function GameBoard() {
     const getBoard = () => myBoard;
 
     const addToBoard = (player, cell) => {
-
         //check if cell is available
         if (myBoard[cell].getValue() === 0) {
             myBoard[cell].addValue(player);
@@ -26,7 +25,6 @@ function GameBoard() {
         else {
             return false;
         }
-
     }
 
     const printThisBoard = () => {
@@ -37,7 +35,6 @@ function GameBoard() {
     const allEqual = arr => arr.every(val => val === arr[0]);
 
     const checkGameState = () => {
-
         //winstates contain all win possibilities
         const winstates =
             [[0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -46,11 +43,9 @@ function GameBoard() {
 
         for (let i in winstates) {
             let arr = [];
-
             for (let j in winstates[i]) {
                 arr.push(myBoard[winstates[i][j]].getValue())
             }
-            //console.log(arr);
             if (arr[0] != 0 && allEqual(arr)) {
                 return "win"
             }
@@ -111,10 +106,9 @@ function GameController(player1Name, player2Name) {
         if (board.addToBoard(getCurrentPlayer().token, cell)) {
             console.log(`Player ${currentPlayer.name} adds ${currentPlayer.token} to cell ${cell}`);
 
-            /*
-            check for win condition here, if we win, then print the winner, same for tie
-            */
-            gameState = board.checkGameState()
+            //check for win condition here, if we win, then print the winner, same for tie
+            gameState = board.checkGameState();
+
             if (gameState == "win") { 
                 console.log(`Winner is ${currentPlayer.name}!`)
                 winner = currentPlayer.name;
@@ -130,8 +124,6 @@ function GameController(player1Name, player2Name) {
         else {
             console.log(`${cell} is occupied`);
         }
-
-        return gameState;
     }
 
     const printGameLook = () => {
@@ -175,6 +167,7 @@ function ScreenController() {
 
         //display win, lose, or which player to play 
         if(gameState == "win" || gameState == "tie"){ 
+            //display winners and show restart
              displayWinner(gameState);
              restart.style.visibility = '';
              restart.addEventListener("click", function(){
@@ -188,14 +181,10 @@ function ScreenController() {
 
         //wherein we create the board
         board.forEach((cell, index) => {
-            //console.log(`${cell.getValue()} ${index}`)
-            //adding buttons
+            //adding buttons, their class, data columns, and value before adding it to the board
             const cellButton = document.createElement('button');
-            //adding their class
             cellButton.classList.add("cell");
-            //adding their data column named cell corresponding to index
             cellButton.dataset.cell = index;
-            //adding the token, if value == 0 then empty
             cellButton.textContent = cell.getValue() == 0 ? "" : cell.getValue();
             boardDiv.appendChild(cellButton);
         })
@@ -222,7 +211,7 @@ function ScreenController() {
     }
 
     //initializer
-    restart.style.visibility = 'hidden';
+    restart.style.visibility = 'hidden'; //restart button initially hidden
     boardDiv.addEventListener("click", clickManager)
     updateBoard();
 }
