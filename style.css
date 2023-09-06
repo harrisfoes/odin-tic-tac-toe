@@ -52,6 +52,11 @@ body{
     height:auto;
     border-radius:8px;
     cursor:pointer;
+    font-family:inherit;
+    color:inherit;
+    font-weight:1000;
+    font-size:5rem;
+    border: 0;
 }
 
 .cell svg{
